@@ -8,7 +8,7 @@ public class ExpressionTreeTest
 
         ExpressionTree et = new ExpressionTree();
 
-        et.buildTree(GFG.infixToPrefix("4+4*2"));
+        et.buildTree(GFG.infixToPrefix("4+4*2^2"));
 
 //        System.out.print("\nPrefix  : ");
 //        et.prefix();
@@ -16,6 +16,11 @@ public class ExpressionTreeTest
 //        et.infix();
 //        System.out.print("\n\nPostfix : ");
 //        et.postfix();
-        System.out.println("\n\nEvaluated Result : "+ et.evaluate());
+        Symbol symbol1 = new Symbol("abc", null, null);
+        Symbol symbol2 = new Symbol("cab", null, null);
+
+
+        System.out.println(Symbol.isTwinChars("abx", "xab"));
+//        System.out.println("\n\nEvaluated Result : "+ et.evaluate());
     }
 }

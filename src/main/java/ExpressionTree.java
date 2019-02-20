@@ -115,7 +115,7 @@ class ExpressionTree
     /** function to check if operator **/
     private boolean isOperator(char ch)
     {
-        return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+        return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
     }
 
     /** function to convert character to digit **/

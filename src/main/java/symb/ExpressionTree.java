@@ -1,10 +1,10 @@
-/**
+package symb; /**
  * Java Program to Implement Expression Tree Algorithm
  */
 
 import java.util.Scanner;
 
-/** Class ExpressionTree **/
+/** Class symb.ExpressionTree **/
 class ExpressionTree
 {
     /** class TreeNode **/

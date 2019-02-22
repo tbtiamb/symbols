@@ -1,3 +1,5 @@
+package symb;
+
 import java.util.*;
 public class GFG {
     // Function to check if

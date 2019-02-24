@@ -1,4 +1,3 @@
-package symb;
 
 import java.util.*;
 public class GFG {

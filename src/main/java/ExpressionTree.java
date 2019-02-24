@@ -1,14 +1,10 @@
-package symb; /**
- * Java Program to Implement Expression Tree Algorithm
- */
 
-import java.util.Scanner;
 
-/** Class symb.ExpressionTree **/
-class ExpressionTree
+/** Class ExpressionTree **/
+public class ExpressionTree
 {
     /** class TreeNode **/
-    class TreeNode
+    public class TreeNode
     {
         char data;
         TreeNode left, right;
@@ -23,13 +19,13 @@ class ExpressionTree
     }
 
     /** class StackNode **/
-    class StackNode
+    public class StackNode
     {
         TreeNode treeNode;
         StackNode next;
 
         /** constructor **/
-        public StackNode(TreeNode treeNode)
+        StackNode(TreeNode treeNode)
         {
             this.treeNode = treeNode;
             next = null;

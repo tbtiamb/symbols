@@ -7,26 +7,51 @@
     <groupId>itmo</groupId>
     <artifactId>symbols</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>java-oo</groupId>
+            <!-- javac 7:
+            <artifactId>javac-oo-plugin</artifactId>
+            <version>0.5</version>-->
+            <!-- javac 8: -->
+            <artifactId>javac8-oo-plugin</artifactId>
+            <version>0.5</version>
+            <scope>provided</scope> <!-- compile-only dep -->
+        </dependency>
+    </dependencies>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
+        <sourceDirectory>${project.basedir}/src</sourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
-
-<dependencies>
-    <!-- lombok -->
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.18.6</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
+    <repositories>
+        <repository>
+            <id>amelentev</id>
+            <url>http://amelentev.github.io/mvnrepo/</url>
+        </repository>
+    </repositories>
+    <!-- not needed for usage -->
+    <distributionManagement>
+        <repository>
+            <id>deploy</id>
+            <url>file:///home/mart/src/my/gitmvnrepo</url>
+        </repository>
+    </distributionManagement>
 </project>

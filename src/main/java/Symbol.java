@@ -1,4 +1,4 @@
-package symb;
+
 
 import lombok.Getter;
 import lombok.Setter;

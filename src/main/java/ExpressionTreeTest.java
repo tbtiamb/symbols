@@ -1,13 +1,19 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class ExpressionTreeTest
-{
-    public static void main(String[] args)
-    {
+public class ExpressionTreeTest {
+    public static void main(String[] args) {
 
-      ExpressionTree et = new ExpressionTree();
+        ExpressionTree et = new ExpressionTree();
 //"(?=[+|\\-|*|/|^|(|)])|(?<=[+|\\-|*|/|^|(|)])"
         et.buildTree(GFG.infixToPrefix("1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1"));
-System.out.println(GFG.infixToPrefix("(a+b+c)*a/c"));
+//        System.out.println(GFG.infixToPrefix("(a+b+c)*a/c"));
+        String [] strs = "2a+c".split("(?=[+|\\\\-|*|^|(|)])|(?<=[+|\\\\-|*|^|(|)])");
+        System.out.println();
+        List<String> stringList = new ArrayList<>();
+        Collections.addAll(stringList, strs);
+        stringList.add(10,"*");
 //        System.out.print("\nPrefix  : ");
 //        et.prefix();
 //        System.out.print("\n\nInfix   : ");
@@ -21,6 +27,6 @@ System.out.println(GFG.infixToPrefix("(a+b+c)*a/c"));
 
 
 //        System.out.println(Symbol.isTwinChars("abx", "xab"));
-        System.out.println("\n\nEvaluated Result : "+ et.evaluate());
+        System.out.println("\n\nEvaluated Result : " + et.evaluate());
     }
 }

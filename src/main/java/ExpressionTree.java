@@ -1,32 +1,44 @@
 
 
-/** Class ExpressionTree **/
-public class ExpressionTree
-{
-    /** class TreeNode **/
-    public class TreeNode
-    {
-        char data;
+/**
+ * Class ExpressionTree
+ **/
+public class ExpressionTree {
+    /**
+     * class TreeNode
+     **/
+    public class TreeNode {
+        String data;
         TreeNode left, right;
 
-        /** constructor **/
-        public TreeNode(char data)
-        {
+        /**
+         * constructor
+         **/
+//        public TreeNode(char data)
+//        {
+//            this.data = data;
+//            this.left = null;
+//            this.right = null;
+//        }
+        public TreeNode(String data) {
             this.data = data;
             this.left = null;
             this.right = null;
         }
+
     }
 
-    /** class StackNode **/
-    public class StackNode
-    {
+    /**
+     * class StackNode
+     **/
+    public class StackNode {
         TreeNode treeNode;
         StackNode next;
 
-        /** constructor **/
-        StackNode(TreeNode treeNode)
-        {
+        /**
+         * constructor
+         **/
+        StackNode(TreeNode treeNode) {
             this.treeNode = treeNode;
             next = null;
         }
@@ -34,174 +46,190 @@ public class ExpressionTree
 
     private static StackNode top;
 
-    /** constructor **/
-    public ExpressionTree()
-    {
+    /**
+     * constructor
+     **/
+    public ExpressionTree() {
         top = null;
     }
 
-    /** function to clear tree **/
-    public void clear()
-    {
+    /**
+     * function to clear tree
+     **/
+    public void clear() {
         top = null;
     }
 
-    /** function to push a node **/
-    private void push(TreeNode ptr)
-    {
+    /**
+     * function to push a node
+     **/
+    private void push(TreeNode ptr) {
         if (top == null)
             top = new StackNode(ptr);
-        else
-        {
+        else {
             StackNode nptr = new StackNode(ptr);
             nptr.next = top;
             top = nptr;
         }
     }
 
-    /** function to pop a node **/
-    private TreeNode pop()
-    {
+    /**
+     * function to pop a node
+     **/
+    private TreeNode pop() {
         if (top == null)
             throw new RuntimeException("Underflow");
-        else
-        {
+        else {
             TreeNode ptr = top.treeNode;
             top = top.next;
             return ptr;
         }
     }
 
-    /** function to get top node **/
-    private TreeNode peek()
-    {
+    /**
+     * function to get top node
+     **/
+    private TreeNode peek() {
         return top.treeNode;
     }
 
-    /** function to insert character **/
-    private void insert(char val)
-    {
-        try
-        {
-            if (isDigit(val))
-            {
+    /**
+     * function to insert character
+     **/
+    private void insert(String val) {
+        try {
+            if (isDigit(val)) {
                 TreeNode nptr = new TreeNode(val);
                 push(nptr);
-            }
-            else if (isOperator(val))
-            {
+            } else if (isOperator(val)) {
                 TreeNode nptr = new TreeNode(val);
                 nptr.left = pop();
                 nptr.right = pop();
                 push(nptr);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Invalid Expression");
         }
     }
 
-    /** function to check if digit **/
-    private boolean isDigit(char ch)
-    {
+    /**
+     * function to check if digit
+     **/
+    private boolean isDigit(char ch) {
         return ch >= '0' && ch <= '9';
     }
 
-    /** function to check if operator **/
-    private boolean isOperator(char ch)
-    {
+    /**
+     * function to check if operator
+     **/
+    private boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
     }
 
-    /** function to convert character to digit **/
-    private int toDigit(char ch)
-    {
+    /**
+     * function to convert character to digit
+     **/
+    private int toDigit(char ch) {
         return ch - '0';
     }
 
-    /** function to build tree from input */
-    public void buildTree(String eqn)
-    {
+    /**
+     * function to build tree from input
+     */
+    public void buildTree(String eqn) {
         for (int i = eqn.length() - 1; i >= 0; i--)
             insert(eqn.charAt(i));
     }
 
-    /** function to evaluate tree */
-    public double evaluate()
-    {
+    /**
+     * function to evaluate tree
+     */
+    public double evaluate() {
         return evaluate(peek());
     }
 
-    /** function to evaluate tree */
-    public double evaluate(TreeNode ptr)
-    {
+    /**
+     * function to evaluate tree
+     */
+    public String evaluate(TreeNode ptr) {
         if (ptr.left == null && ptr.right == null)
-            return toDigit(ptr.data);
-        else
-        {
-            double result = 0.0;
-            double left = evaluate(ptr.left);
-            double right = evaluate(ptr.right);
-            char operator = ptr.data;
+//            return toDigit(ptr.data);
+            return ptr.data;
+        else {
+            String result = "";
+            String left = evaluate(ptr.left);
+            String right = evaluate(ptr.right);
+            String operator = ptr.data;
 
-            switch (operator)
-            {
-                case '+' : result = left + right; break;
-                case '-' : result = left - right; break;
-                case '*' : result = left * right; break;
-                case '/' : result = left / right; break;
-                default  : result = left + right; break;
+            switch (operator) {
+                case "+":
+                    result = left + right;
+                    break;
+                case "-":
+                    result = left - right;
+                    break;
+                case "*":
+                    result = left * right;
+                    break;
+                case "/":
+                    result = left / right;
+                    break;
+                default:
+                    result = left + right;
+                    break;
             }
             return result;
         }
     }
 
-    /** function to get postfix expression */
-    public void postfix()
-    {
+    /**
+     * function to get postfix expression
+     */
+    public void postfix() {
         postOrder(peek());
     }
 
-    /** post order traversal */
-    private void postOrder(TreeNode ptr)
-    {
-        if (ptr != null)
-        {
+    /**
+     * post order traversal
+     */
+    private void postOrder(TreeNode ptr) {
+        if (ptr != null) {
             postOrder(ptr.left);
             postOrder(ptr.right);
             System.out.print(ptr.data);
         }
     }
 
-    /** function to get infix expression */
-    public void infix()
-    {
+    /**
+     * function to get infix expression
+     */
+    public void infix() {
         inOrder(peek());
     }
 
-    /** in order traversal */
-    private void inOrder(TreeNode ptr)
-    {
-        if (ptr != null)
-        {
+    /**
+     * in order traversal
+     */
+    private void inOrder(TreeNode ptr) {
+        if (ptr != null) {
             inOrder(ptr.left);
             System.out.print(ptr.data);
             inOrder(ptr.right);
         }
     }
 
-    /** function to get prefix expression */
-    public void prefix()
-    {
+    /**
+     * function to get prefix expression
+     */
+    public void prefix() {
         preOrder(peek());
     }
 
-    /** pre order traversal */
-    private void preOrder(TreeNode ptr)
-    {
-        if (ptr != null)
-        {
+    /**
+     * pre order traversal
+     */
+    private void preOrder(TreeNode ptr) {
+        if (ptr != null) {
             System.out.print(ptr.data);
             preOrder(ptr.left);
             preOrder(ptr.right);

@@ -1,4 +1,7 @@
-
+import com.Parser;
+import expressions.*;
+import expressions.Number;
+import sun.security.krb5.internal.PAData;
 
 /**
  * Class ExpressionTree
@@ -8,7 +11,7 @@ public class ExpressionTree {
      * class TreeNode
      **/
     public class TreeNode {
-        String data;
+        Expression data;
         TreeNode left, right;
 
         /**
@@ -20,7 +23,7 @@ public class ExpressionTree {
 //            this.left = null;
 //            this.right = null;
 //        }
-        public TreeNode(String data) {
+        public TreeNode(Expression data) {
             this.data = data;
             this.left = null;
             this.right = null;
@@ -96,35 +99,32 @@ public class ExpressionTree {
     /**
      * function to insert character
      **/
-    private void insert(String val) {
+    private void insert(char val) {
         try {
-            if (isDigit(val)) {
-                TreeNode nptr = new TreeNode(val);
+            if (Parser.isNumber(val)) {
+                TreeNode nptr = new TreeNode(new Number(Double.parseDouble(val+"")));
                 push(nptr);
-            } else if (isOperator(val)) {
-                TreeNode nptr = new TreeNode(val);
+
+            }
+            if (Parser.isOperator(val)) {
+                TreeNode nptr = new TreeNode(new Symbol(val+""));
                 nptr.left = pop();
                 nptr.right = pop();
                 push(nptr);
             }
+            if (Parser.isSymbol(val)) {
+                TreeNode nptr = new TreeNode(new Symbol(val+""));
+                push(nptr);
+            }
+//            else {
+//                TreeNode nptr = new TreeNode(val);
+//                push(nptr);
+//            }
         } catch (Exception e) {
             System.out.println("Invalid Expression");
         }
     }
 
-    /**
-     * function to check if digit
-     **/
-    private boolean isDigit(char ch) {
-        return ch >= '0' && ch <= '9';
-    }
-
-    /**
-     * function to check if operator
-     **/
-    private boolean isOperator(char ch) {
-        return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
-    }
 
     /**
      * function to convert character to digit
@@ -144,38 +144,38 @@ public class ExpressionTree {
     /**
      * function to evaluate tree
      */
-    public double evaluate() {
+    public Expression evaluate() {
         return evaluate(peek());
     }
 
     /**
      * function to evaluate tree
      */
-    public String evaluate(TreeNode ptr) {
+    public Expression evaluate(TreeNode ptr) {
         if (ptr.left == null && ptr.right == null)
-//            return toDigit(ptr.data);
             return ptr.data;
+//            return ptr.data;
         else {
-            String result = "";
-            String left = evaluate(ptr.left);
-            String right = evaluate(ptr.right);
-            String operator = ptr.data;
+            Expression result = null;
+            Expression left = evaluate(ptr.left);
+            Expression operator = ptr.data;
+            Expression right = evaluate(ptr.right);
 
-            switch (operator) {
+            switch (((Symbol)operator).getValue()) {
                 case "+":
-                    result = left + right;
+                    result = left.add(right);
                     break;
                 case "-":
-                    result = left - right;
+                    result = left.subtract(right);
                     break;
                 case "*":
-                    result = left * right;
+                    result = left.multiply(right);
                     break;
                 case "/":
-                    result = left / right;
+                    result = left.divide(right);
                     break;
                 default:
-                    result = left + right;
+                    result = left.add(right);
                     break;
             }
             return result;

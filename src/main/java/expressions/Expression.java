@@ -2,19 +2,27 @@ package expressions;
 
 public interface Expression {
 
-    Expression addition(Expression other);
-    Expression addition(IntegerExpression other);
-    Expression addition(DoubleExpression other);
+    Expression add(Expression other);
+    Expression add(SummedExpression other);
+    Expression add(FractionalExpression other);
+    Expression add(Number other);
+    Expression add(Symbol other);
 
-    Expression multiplication(Expression other);
-    Expression multiplication(IntegerExpression other);
-    Expression multiplication(DoubleExpression other);
+    Expression multiply(Expression other);
+    Expression multiply(SummedExpression other);
+    Expression multiply(FractionalExpression other);
+    Expression multiply(Number other);
+    Expression multiply(Symbol other);
 
-    Expression division(Expression other);
-    Expression division(IntegerExpression other);
-    Expression division(DoubleExpression other);
+    Expression divide(Expression other);
+    Expression divide(SummedExpression other);
+    Expression divide(FractionalExpression other);
+    Expression divide(Number other);
+    Expression divide(Symbol other);
 
-    Expression subtraction(Expression other);
-    Expression subtraction(IntegerExpression other);
-    Expression subtraction(DoubleExpression other);
+    Expression subtract(Expression other);
+    Expression subtract(SummedExpression other);
+    Expression subtract(FractionalExpression other);
+    Expression subtract(Number other);
+    Expression subtract(Symbol other);
 }

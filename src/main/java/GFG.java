@@ -58,22 +58,7 @@ public class GFG {
                 {
 
                     // operand 1
-                    String op1 = operands.peek();
-                    operands.pop();
-
-                    // operand 2
-                    String op2 = operands.peek();
-                    operands.pop();
-
-                    // operator
-                    char op = operators.peek();
-                    operators.pop();
-
-                    // Add operands and operator
-                    // in form operator +
-                    // operand1 + operand2.
-                    String tmp = op + op2 + op1;
-                    operands.push(tmp);
+                    getAll(operators, operands);
                 }
 
                 // Pop opening bracket
@@ -102,17 +87,7 @@ public class GFG {
                                 getPriority(operators.peek()))
                 {
 
-                    String op1 = operands.peek();
-                    operands.pop();
-
-                    String op2 = operands.peek();
-                    operands.pop();
-
-                    char op = operators.peek();
-                    operators.pop();
-
-                    String tmp = op + op2 + op1;
-                    operands.push(tmp);
+                    getAll(operators, operands);
                 }
 
                 operators.push(infix.charAt(i));
@@ -125,22 +100,26 @@ public class GFG {
         // each pop operands stack.
         while (!operators.empty())
         {
-            String op1 = operands.peek();
-            operands.pop();
-
-            String op2 = operands.peek();
-            operands.pop();
-
-            char op = operators.peek();
-            operators.pop();
-
-            String tmp = op + op2 + op1;
-            operands.push(tmp);
+            getAll(operators, operands);
         }
 
         // Final prefix expression is
         // present in operands stack.
         return operands.peek();
+    }
+
+    private static void getAll(Stack<Character> operators, Stack<String> operands) {
+        String op1 = operands.peek();
+        operands.pop();
+
+        String op2 = operands.peek();
+        operands.pop();
+
+        char op = operators.peek();
+        operators.pop();
+
+        String tmp = op + op2 + op1;
+        operands.push(tmp);
     }
 
 //    // Driver code
